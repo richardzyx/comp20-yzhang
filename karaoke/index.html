@@ -14,7 +14,26 @@
 <div id="lyrics"></div>
 
 <script>
-	// Complete this section and create a CSS file named style.css
+var mv = document.getElementById("music_video");
+mv.addEventListener("canplay", lyricplay, true);
+
+function lyricplay(){
+	var mv = document.getElementById("music_video");
+	mv.play();
+	entirelyric();
+	return;
+}
+
+function entirelyric(){
+	var mv = document.getElementById("music_video");
+	while (!mv.ended){
+			if(mv.currentTime > 1){
+				document.getElementById("lyrics").innerHTML = "NIHAO";
+			}
+			alert(mv.currentTime);
+	}
+}
+
 </script>
 </body>
 </html>	
