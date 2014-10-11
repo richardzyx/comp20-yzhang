@@ -15,22 +15,27 @@
 
 <script>
 var mv = document.getElementById("music_video");
-mv.addEventListener("canplay", lyricplay, true);
+mv.addEventListener("timeupdate", lyricplay, true);
 
 function lyricplay(){
-	var mv = document.getElementById("music_video");
-	mv.play();
-	entirelyric();
-	return;
-}
-
-function entirelyric(){
-	var mv = document.getElementById("music_video");
-	while (!mv.ended){
-			if(mv.currentTime > 1){
-				document.getElementById("lyrics").innerHTML = "NIHAO";
-			}
-			alert(mv.currentTime);
+	alert("cao");
+	if(mv.currentTime > 6 && mv.currentTime <36){
+		document.getElementById("lyrics").innerHTML = "Oh, I could hide 'neath the wings"+"<br/>"+"Of the bluebird as she sings."+"<br/>"+"The six o'clock alarm would never ring."+"<br/>"+"But it rings and I rise,"+"<br/>"+"Wipe the sleep out of my eyes."+"<br/>"+"My shavin' razor's cold and it stings.";
+	}
+	if(mv.currentTime > 38 && mv.currentTime <53){
+		document.getElementById("lyrics").innerHTML = "Cheer up, Sleepy Jean."+"<br/>"+"Oh, what can it mean."+"<br/>"+"To a daydream believer"+"<br/>"+"And a homecoming queen.";
+	}
+	if(mv.currentTime > 55 && mv.currentTime <83){
+		document.getElementById("lyrics").innerHTML = "You once thought of me"+"<br/>"+"As a white knight on a steed."+"<br/>"+"Now you know how happy I can be."+"<br/>"+"Oh, and our good times start and end"+"<br/>"+"Without dollar one to spend."+"<br/>"+"But how much, baby, do we really need.";
+	}
+	if(mv.currentTime > 85 && mv.currentTime <119){
+		document.getElementById("lyrics").innerHTML = "Cheer up, Sleepy Jean."+"<br/>"+"Oh, what can it mean."+"<br/>"+"To a daydream believer"+"<br/>"+"And a homecoming queen."+"<br/>"+"Cheer up, Sleepy Jean."+"<br/>"+"Oh, what can it mean."+"<br/>"+"To a daydream believer"+"<br/>"+"And a homecoming queen.";
+	}
+	if(mv.currentTime > 120 && mv.currentTime <128){
+		document.getElementById("lyrics").innerHTML = "[Instrumental interlude]";
+	}
+	if(mv.currentTime > 128 && mv.currentTime <164){
+		document.getElementById("lyrics").innerHTML = "Cheer up, Sleepy Jean."+"<br/>"+"Oh, what can it mean."+"<br/>"+"To a daydream believer"+"<br/>"+"And a homecoming queen."+"<br/>"+"[Repeat and fade]";
 	}
 }
 
