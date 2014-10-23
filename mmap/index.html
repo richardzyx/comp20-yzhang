@@ -9,7 +9,7 @@
 		<link rel="stylesheet" href="map.css" />
 		
 		<script>
-			var myLat = 0;//22
+			var myLat = 0;//33
 			var myLng = 0;
 			var request = new XMLHttpRequest();
 			var me = new google.maps.LatLng(myLat, myLng);
@@ -87,7 +87,6 @@
 
 			function putMarkers(){
 				for(i=0; i<allData['characters'].length;i++){
-					var charMarker;
 					charName = allData['characters'][i]['name'];
 					charLat = allData['characters'][i]['loc']['latitude'];
 					charLng = allData['characters'][i]['loc']['longitude'];
