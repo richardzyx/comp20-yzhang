@@ -21,7 +21,6 @@
 			var map;
 			var marker;
 			var infowindow = new google.maps.InfoWindow();
-			var charInfoWindow = new google.maps.InfoWindow();
 			var places;
 			var xhr = new XMLHttpRequest();
 			var allData;
@@ -87,6 +86,7 @@
 			}
 
 			function putMarkers(){
+				var charMarker;
 				for(i=0; i<allData['characters'].length;i++){
 					charName = allData['characters'][i]['name'];
 					charLat = allData['characters'][i]['loc']['latitude'];
@@ -103,9 +103,9 @@
 						+ charLng + "<br/>"+"Note: "+charNote;
 					
 					google.maps.event.addListener(charMarker, 'click', function() {
-						charInfoWindow.close();
-						charInfoWindow.setContent(charInfo);
-    					charInfoWindow.open(map,this);
+						infowindow.close();
+						infowindow.setContent(charInfo);
+    					infowindow.open(map,this);
   					});
 				}
 			}
