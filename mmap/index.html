@@ -61,6 +61,12 @@
 						console.log(xhr.responseText);
 						allData = JSON.parse(xhr.responseText);
 						putMarkers();
+						for(i=0;i<charDisMilesTable.length;i++){
+							alert("it's working!");
+							console.log(charDisMilesTable[i]);
+							console.log(charDistance[charDisMilesTable[i]]);
+						}
+
 					}
 				};
 				// Create a marker
@@ -77,12 +83,6 @@
 					infowindow.open(map, marker);
 				});
 				
-				for(i=0;i<charDisMilesTable.length;i++){
-					alert("it's working!");
-					console.log(charDisMilesTable[i]);
-					console.log(charDistance[charDisMilesTable[i]]);
-				}
-
 				// Calling Google Places API
 				/*var request = {
 					location: me,
