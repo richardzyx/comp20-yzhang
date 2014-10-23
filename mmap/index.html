@@ -55,7 +55,7 @@
 				xhr.onreadystatechange=function(){
 					if (xhr.readyState == 4 && xhr.status ==200){
 						alert("Got data back!");
-						console.log(request.responseText);
+						console.log(xhr.responseText);
 					}
 				};
 				// Create a marker
