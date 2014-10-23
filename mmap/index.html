@@ -24,6 +24,8 @@
 			var places;
 			var xhr = new XMLHttpRequest();
 			var allData;
+			var charDistance = new Object;
+			var charDisMilesTable = new Array();
 
 			function init()
 			{
@@ -128,8 +130,37 @@
     				strokeWeight: 2
 				});
 
+				var charDisMiles = charDisFunc;
+				charDisMilesTable.push(charDisMiles);
+
+				charDistance[charDisMiles] = charName;
+
   				charMarker.setMap(map);
   				charPath.setMap(map);
+			}
+
+			function charDisFunc(){
+				function toRad(x) {
+   					return x * Math.PI / 180;
+				}
+
+				var lat2 = myLat; 
+				var lon2 = myLng; 
+				var lat1 = charLat; 
+				var lon1 = charLng; 
+
+				var R = 6371; // km 
+				var x1 = lat2-lat1;
+				var dLat = x1.toRad();  
+				var x2 = lon2-lon1;
+				var dLon = x2.toRad();  
+				var a = Math.sin(dLat/2) * Math.sin(dLat/2) + 
+				                Math.cos(lat1.toRad()) * Math.cos(lat2.toRad()) * 
+				                Math.sin(dLon/2) * Math.sin(dLon/2);  
+				var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+				var d = R * c; 
+
+				alert(d);
 			}
 
 			function createStuMarker(stuData){
@@ -185,6 +216,6 @@
 	
 	<body onload="init()">
 		<div id="map_canvas"></div>
-		<div id="legend"><h3>Distance</h3></div>
+		<div id="legend"><h3>Distance From Shortest to Longest</h3></div>
 	</body>
 </html>
