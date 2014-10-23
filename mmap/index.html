@@ -99,9 +99,11 @@
 
 					charInfo = "Name: "+charName+"<br/>"+"latitude: "+charLat+"<br/>"+"longitude: "
 						+ charLng + "<br/>"+"Note: "+charNote;
+					alert(charInfo);
 					
 					google.maps.event.addListener(charMarker, 'click', function() {
 						infowindow.setContent(charInfo);
+						alert("zaici"+charInfo);
     					infowindow.open(map, this);
   					});
   					charMarker.setMap(map);
