@@ -98,6 +98,15 @@
 						icon: "image/"+charName+".png"
 					});
 					charMarker.setMap(map);
+
+					var charInfo = new google.maps.InfoWindow({
+						content: "Name: "+charName+"<br/>"+"latitude: "+charLat+"<br/>"+"longitude: "
+						+ charLng + "<br/>"+"Note: "+charNote
+					});
+					
+					google.maps.event.addListener(marker, 'click', function() {
+    					charInfo.open(map,marker);
+  					});
 				}
 			}
 			
