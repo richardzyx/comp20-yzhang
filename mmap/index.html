@@ -130,7 +130,7 @@
     				strokeWeight: 2
 				});
 
-				var charDisMiles = charDisFunc();
+				var charDisMiles = charDisFunc(charLat, charLng);
 				alert(charDisMiles);
 				charDisMilesTable.push(charDisMiles);
 
@@ -140,7 +140,7 @@
   				charPath.setMap(map);
 			}
 
-			function charDisFunc(){
+			function charDisFunc(charLat, charLng){
 				function toRad(x) {
    					return x * Math.PI / 180;
 				}
