@@ -25,6 +25,9 @@
 			var xhr = new XMLHttpRequest();
 			var allData;
 
+			map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(
+				document.getElementById('legend'));
+
 			function init()
 			{
 				map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
@@ -112,7 +115,6 @@
     				infowindow.open(map, this);
   				});
 
-				alert(me);
 				var charPolyline = [
 					me,
 					charPos
@@ -181,5 +183,6 @@
 	
 	<body onload="init()">
 		<div id="map_canvas"></div>
+		<div id="legend">My first legend!</div>
 	</body>
 </html>
