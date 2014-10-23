@@ -52,7 +52,7 @@
 				xhr.open("POST","http://chickenofthesea.herokuapp.com/sendLocation", true);
 				xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 				xhr.send("login=CruellaDeVil&lat="+myLat+"&lng"+myLng);	
-				xhr.onreadystatechange=function{
+				xhr.onreadystatechange=function(){
 					if (xhr.readyState == 4 && xhr.status ==200){
 						alert("Got data back!");
 						console.log(request.responseText);
