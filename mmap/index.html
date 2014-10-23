@@ -87,12 +87,12 @@
 
 			function putMarkers(){
 				for(i=0; i<allData['characters'].length;i++){
-					charName = allData['characters'][i]['name'];
-					charLat = allData['characters'][i]['loc']['latitude'];
-					charLng = allData['characters'][i]['loc']['longitude'];
-					charNote = allData['characters'][i]['loc']['note'];
-					charPos = new google.maps.LatLng(charLat, charLng);
-					charMarker = new google.maps.Marker({
+					var charName = allData['characters'][i]['name'];
+					var charLat = allData['characters'][i]['loc']['latitude'];
+					var charLng = allData['characters'][i]['loc']['longitude'];
+					var charNote = allData['characters'][i]['loc']['note'];
+					var charPos = new google.maps.LatLng(charLat, charLng);
+					var charMarker = new google.maps.Marker({
 						position: charPos,
 						icon: "image/"+charName+".png",
 						title: charName
