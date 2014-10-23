@@ -87,28 +87,32 @@
 
 			function putMarkers(){
 				for(i=0; i<allData['characters'].length;i++){
-					var charName = allData['characters'][i]['name'];
-					var charLat = allData['characters'][i]['loc']['latitude'];
-					var charLng = allData['characters'][i]['loc']['longitude'];
-					var charNote = allData['characters'][i]['loc']['note'];
-					var charPos = new google.maps.LatLng(charLat, charLng);
-					var charMarker = new google.maps.Marker({
-						position: charPos,
-						icon: "image/"+charName+".png",
-						title: charName
-					});
-
-					charInfo = "Name: "+charName+"<br/>"+"latitude: "+charLat+"<br/>"+"longitude: "
-						+ charLng + "<br/>"+"Note: "+charNote;
-					alert(charInfo);
-					
-					google.maps.event.addListener(charMarker, 'click', function() {
-						infowindow.setContent(charInfo);
-						alert("zaici"+charInfo);
-    					infowindow.open(map, this);
-  					});
-  					charMarker.setMap(map);
+					createCharMarker(allData['characters'][i]);
 				}
+			}
+
+			function createCharMarker(charData){
+				var charName = charData['name'];
+				var charLat = charData['loc']['latitude'];
+				var charLng = charData['loc']['longitude'];
+				var charNote = charData['loc']['note'];
+				var charPos = new google.maps.LatLng(charLat, charLng);
+				var charMarker = new google.maps.Marker({
+					position: charPos,
+					icon: "image/"+charName+".png",
+					title: charName
+				});
+
+				charInfo = "Name: "+charName+"<br/>"+"latitude: "+charLat+"<br/>"+"longitude: "
+					+ charLng + "<br/>"+"Note: "+charNote;
+				alert(charInfo);
+					
+				google.maps.event.addListener(charMarker, 'click', function() {
+					infowindow.setContent(charInfo);
+						alert("zaici"+charInfo);
+    				infowindow.open(map, this);
+  				});
+  				charMarker.setMap(map);
 			}
 			
 			// Taken from http://code.google.com/apis/maps/documentation/javascript/places.html
