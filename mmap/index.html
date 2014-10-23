@@ -96,16 +96,15 @@
 						position: charPos,
 						icon: "image/"+charName+".png"
 					});
-					charMarker.setMap(map);
 
 					charInfo = "Name: "+charName+"<br/>"+"latitude: "+charLat+"<br/>"+"longitude: "
 						+ charLng + "<br/>"+"Note: "+charNote;
 					
 					google.maps.event.addListener(charMarker, 'click', function() {
-						infowindow.close();
 						infowindow.setContent(charInfo);
-    					infowindow.open(map,this);
+    					infowindow.open(map, this);
   					});
+  					charMarker.setMap(map);
 				}
 			}
 			
