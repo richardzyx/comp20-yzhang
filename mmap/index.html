@@ -50,7 +50,7 @@
 				// Update map and go there...
 				map.panTo(me);
 				xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-				xhr.open("post","http://chickenofthesea.herokuapp.com/sendLocation", true);
+				xhr.open("POST","http://chickenofthesea.herokuapp.com/sendLocation", true);
 				xhr.send("login=CruellaDeVil&lat="+myLat+"&lng"=myLng);	
 				xhr.onreadystatechange=function{
 					if (xhr.readyState == 4 && xhr.status ==200){
