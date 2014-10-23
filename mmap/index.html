@@ -23,6 +23,7 @@
 			var infowindow = new google.maps.InfoWindow();
 			var places;
 			var xhr = new XMLHttpRequest();
+			var allData;
 
 			function init()
 			{
@@ -56,6 +57,8 @@
 					if (xhr.readyState == 4 && xhr.status ==200){
 						alert("Got data back!");
 						console.log(xhr.responseText);
+						allData = JSON.parse(xhr.responseText);
+						putMarkers();
 					}
 				};
 				// Create a marker
@@ -80,6 +83,22 @@
 				};
 				service = new google.maps.places.PlacesService(map);
 				service.search(request, callback);
+			}
+
+			function putMarkers(){
+				var charMarker;
+				for(i=0; i<allData['characters'].length;i++){
+					charName = allData['characters'][i]['name'];
+					charLat = allData['characters'][i]['loc']['latitude'];
+					charLng = allData['characters'][i]['loc']['longitude'];
+					charNote = allData['characters'][i]['loc']['note'];
+					charPos = new google.maps.LatLng(charLat, charLng);
+					charMarker = new google.maps.Marker({
+						position: charPos,
+						icon: "image/"+charName+".png"
+					});
+					charMarker.setMap(map);
+				}
 			}
 			
 			// Taken from http://code.google.com/apis/maps/documentation/javascript/places.html
