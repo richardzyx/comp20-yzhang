@@ -22,6 +22,7 @@
 			var marker;
 			var infowindow = new google.maps.InfoWindow();
 			var places;
+			var xhr = new XMLHttpRequest();
 			
 			function init()
 			{
@@ -46,10 +47,17 @@
 			function renderMap()
 			{
 				me = new google.maps.LatLng(myLat, myLng);
-				
 				// Update map and go there...
 				map.panTo(me);
-	
+				xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+				xhr.open("post","http://chickenofthesea.herokuapp.com/sendLocation", true);
+				xhr.send("login=CruellaDeVil&lat="+myLat+"&lng"=myLng);	
+				xhr.onreadystatechange=function{
+					if (xhr.readyState == 4 && xhr.status ==200){
+						alert("Got data back!");
+						console.log(request.responseText);
+					}
+				};
 				// Create a marker
 				marker = new google.maps.Marker({
 					position: me,
