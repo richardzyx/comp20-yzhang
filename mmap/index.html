@@ -100,15 +100,12 @@
 				var charMarker = new google.maps.Marker({
 					position: charPos,
 					icon: "image/"+charName+".png",
-					title: charName
+					title: "Name: "+charName+"<br/>"+"latitude: "+charLat+"<br/>"+"longitude: "
+					+ charLng + "<br/>"+"Note: "+charNote
 				});
 
-				charInfo = "Name: "+charName+"<br/>"+"latitude: "+charLat+"<br/>"+"longitude: "
-					+ charLng + "<br/>"+"Note: "+charNote;
-				alert(charInfo);
-					
 				google.maps.event.addListener(charMarker, 'click', function() {
-					infowindow.setContent(charInfo);
+					infowindow.setContent(this.title);
 						alert("zaici"+charInfo);
     				infowindow.open(map, this);
   				});
