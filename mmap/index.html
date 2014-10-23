@@ -130,7 +130,8 @@
     				strokeWeight: 2
 				});
 
-				var charDisMiles = charDisFunc;
+				var charDisMiles = charDisFunc();
+				alert(charDisMiles);
 				charDisMilesTable.push(charDisMiles);
 
 				charDistance[charDisMiles] = charName;
@@ -161,6 +162,7 @@
 				var d = R * c; 
 
 				alert(d);
+				return d;
 			}
 
 			function createStuMarker(stuData){
