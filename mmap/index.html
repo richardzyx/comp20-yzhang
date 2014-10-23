@@ -132,6 +132,7 @@
 				});
 
 				google.maps.event.addListener(marker, 'click', function() {
+					alert("zaizhe!!!");
 					infowindow.close();
 					infowindow.setContent(place.name);
 					infowindow.open(map, this);
