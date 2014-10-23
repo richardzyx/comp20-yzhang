@@ -9,7 +9,7 @@
 		<link rel="stylesheet" href="map.css" />
 		
 		<script>
-			var myLat = 0;//biaoji zuoyong
+			var myLat = 0;//11
 			var myLng = 0;
 			var request = new XMLHttpRequest();
 			var me = new google.maps.LatLng(myLat, myLng);
@@ -23,8 +23,7 @@
 			var infowindow = new google.maps.InfoWindow();
 			var places;
 			var xhr = new XMLHttpRequest();
-			xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-			
+
 			function init()
 			{
 				map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
@@ -51,6 +50,7 @@
 				// Update map and go there...
 				map.panTo(me);
 				xhr.open("POST","http://chickenofthesea.herokuapp.com/sendLocation", true);
+				xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 				xhr.send("login=CruellaDeVil&lat="+myLat+"&lng"=myLng);	
 				xhr.onreadystatechange=function{
 					if (xhr.readyState == 4 && xhr.status ==200){
