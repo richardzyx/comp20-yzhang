@@ -9,19 +9,18 @@
 		<link rel="stylesheet" href="map.css" />
 		
 		<script>
-			var myLat = 0;//44
+			var myLat = 0;
 			var myLng = 0;
 			var request = new XMLHttpRequest();
 			var me = new google.maps.LatLng(myLat, myLng);
 			var myOptions = {
-						zoom: 13, // The larger the zoom number, the bigger the zoom
+						zoom: 11, // The larger the zoom number, the bigger the zoom
 						center: me,
 						mapTypeId: google.maps.MapTypeId.ROADMAP
 					};
 			var map;
 			var marker;
 			var infowindow = new google.maps.InfoWindow();
-			var places;
 			var xhr = new XMLHttpRequest();
 			var allData;
 			var charDistance = new Object;
@@ -57,21 +56,18 @@
 				xhr.send("login=CruellaDeVil&lat="+myLat+"&lng="+myLng);	
 				xhr.onreadystatechange=function(){
 					if (xhr.readyState == 4 && xhr.status ==200){
-						alert("Got data back!");
 						console.log(xhr.responseText);
 						allData = JSON.parse(xhr.responseText);
 						putMarkers();
 						var legend = document.getElementById('legend');
 						charDisMilesTable.sort(function(a,b){return a-b});
 						for(i=0;i<charDisMilesTable.length;i++){
-							console.log(charDisMilesTable[i]);
 							var name = charDistance[charDisMilesTable[i]];
 							var dis = charDisMilesTable[i];
 							var div = document.createElement('div');
 							div.innerHTML = name + ": "+dis+" miles";
 							legend.appendChild(div);
 						}
-
 					}
 				};
 				// Create a marker
@@ -88,16 +84,7 @@
 					infowindow.open(map, marker);
 				});
 				
-				// Calling Google Places API
-				/*var request = {
-					location: me,
-					radius: '500',
-					types: ['food']
-				};
-				service = new google.maps.places.PlacesService(map);
-				service.search(request, callback);
-				*/
-
+				//put the legends at the right bottom and frozen
 				map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(
 				document.getElementById('legend'));
 			}
@@ -142,10 +129,8 @@
 				});
 
 				var charDisMiles = charDisFunc(charLat, charLng);//number tested correct
-				console.log(charDisMiles);
-				charDisMilesTable.push(charDisMiles);
-
-				charDistance[charDisMiles] = charName;
+				charDisMilesTable.push(charDisMiles);//put all distance into an array
+				charDistance[charDisMiles] = charName;//put distance with name into an object
 
   				charMarker.setMap(map);
   				charPath.setMap(map);
@@ -197,34 +182,7 @@
 
   				stuMarker.setMap(map);
 			}
-			
-			// Taken from http://code.google.com/apis/maps/documentation/javascript/places.html
-			/*function callback(results, status)
-			{
-				if (status == google.maps.places.PlacesServiceStatus.OK) {
-					alert("Got places back!");
-					places = results;
-					for (var i = 0; i < results.length; i++) {
-						createMarker(results[i]);
-					}
-				}
-			}
-			*/
-
-			function createMarker(place)
-			{
-				var placeLoc = place.geometry.location;
-				var marker = new google.maps.Marker({
-					map: map,
-					position: place.geometry.location
-				});
-
-				google.maps.event.addListener(marker, 'click', function() {
-					infowindow.close();
-					infowindow.setContent(place.name);
-					infowindow.open(map, this);
-				});
-      		}
+						
 		</script>
 	</head>
 	
