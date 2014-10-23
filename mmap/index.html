@@ -62,7 +62,7 @@
 						allData = JSON.parse(xhr.responseText);
 						putMarkers();
 						var legend = document.getElementById('legend');
-						charDisMilesTable.sort();
+						charDisMilesTable.sort(function(a,b){return a-b});
 						for(i=0;i<charDisMilesTable.length;i++){
 							console.log(charDisMilesTable[i]);
 							var name = charDistance[charDisMilesTable[i]];
