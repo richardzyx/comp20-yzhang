@@ -89,6 +89,9 @@
 				for(i=0; i<allData['characters'].length;i++){
 					createCharMarker(allData['characters'][i]);
 				}
+				for(i=0; i<allData['students'].length;i++){
+					createStuMarker(allData['students'][i]);
+				}
 			}
 
 			function createCharMarker(charData){
@@ -106,7 +109,25 @@
 
 				google.maps.event.addListener(charMarker, 'click', function() {
 					infowindow.setContent(this.title);
-					alert("zaici");
+    				infowindow.open(map, this);
+  				});
+  				charMarker.setMap(map);
+			}
+
+			function createStuMarker(stuData){
+				var stuLogin = stuData['login'];
+				var stuLat = stuData['lat'];
+				var stuLng = stuData['lng'];
+				var stuTime = stuData['created_at'];
+				var stuPos = new google.maps.LatLng(stuLat, stuLng);
+				var stuMarker = new google.maps.Marker({
+					position: stuPos,
+					title: "Login: "+stuLogin+"<br/>"+"latitude: "+stuLat+"<br/>"+"longitude: "
+					+ stuLng + "<br/>"+"Timestamp: "+stuTime
+				});
+
+				google.maps.event.addListener(stuMarker, 'click', function() {
+					infowindow.setContent(this.title);
     				infowindow.open(map, this);
   				});
   				charMarker.setMap(map);
@@ -133,10 +154,8 @@
 				});
 
 				google.maps.event.addListener(marker, 'click', function() {
-					alert("zaizhe!!!");
 					infowindow.close();
 					infowindow.setContent(place.name);
-					alert(place.name);
 					infowindow.open(map, this);
 				});
       }
