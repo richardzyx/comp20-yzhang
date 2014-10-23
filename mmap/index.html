@@ -9,7 +9,7 @@
 		<link rel="stylesheet" href="map.css" />
 		
 		<script>
-			var myLat = 0;//33
+			var myLat = 0;//44
 			var myLng = 0;
 			var request = new XMLHttpRequest();
 			var me = new google.maps.LatLng(myLat, myLng);
@@ -21,6 +21,7 @@
 			var map;
 			var marker;
 			var infowindow = new google.maps.InfoWindow();
+			var charInfoWindow = new google.maps.InfoWindow();
 			var places;
 			var xhr = new XMLHttpRequest();
 			var allData;
@@ -98,13 +99,13 @@
 					});
 					charMarker.setMap(map);
 
-					charInfo = new google.maps.InfoWindow({
-						content: "Name: "+charName+"<br/>"+"latitude: "+charLat+"<br/>"+"longitude: "
-						+ charLng + "<br/>"+"Note: "+charNote
-					});
+					charInfo = "Name: "+charName+"<br/>"+"latitude: "+charLat+"<br/>"+"longitude: "
+						+ charLng + "<br/>"+"Note: "+charNote;
 					
 					google.maps.event.addListener(charMarker, 'click', function() {
-    					charInfo.open(map,this);
+						charInfoWindow.close();
+						charInfoWindow.setContent(charInfo);
+    					charInfoWindow.open(map,this);
   					});
 				}
 			}
