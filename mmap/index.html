@@ -61,10 +61,14 @@
 						console.log(xhr.responseText);
 						allData = JSON.parse(xhr.responseText);
 						putMarkers();
+						var legend = document.getElementById('legend');
+						charDisMilesTable.sort();
 						for(i=0;i<charDisMilesTable.length;i++){
-							alert("it's working!");
-							console.log(charDisMilesTable[i]);
-							console.log(charDistance[charDisMilesTable[i]]);
+							var name = charDistance[charDisMilesTable[i]];
+							var dis = charDisMilesTable[i];
+							var div = document.createElement('div');
+							div.innerHTML = name + ": "+dis;
+							legend.appendChild(div);
 						}
 
 					}
