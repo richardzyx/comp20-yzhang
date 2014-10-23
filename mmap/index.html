@@ -77,6 +77,12 @@
 					infowindow.open(map, marker);
 				});
 				
+				for(i=0;i<charDisMilesTable.length;i++){
+					alert("it's working!");
+					console.log(charDisMilesTable[i]);
+					console.log(charDistance[charDisMilesTable[i]]);
+				}
+
 				// Calling Google Places API
 				/*var request = {
 					location: me,
@@ -130,10 +136,8 @@
     				strokeWeight: 2
 				});
 
-				var charDisMiles = charDisFunc(charLat, charLng);
+				var charDisMiles = charDisFunc(charLat, charLng);//number tested correct
 				console.log(charDisMiles);
-				console.log(myLat);
-				console.log(myLng);
 				charDisMilesTable.push(charDisMiles);
 
 				charDistance[charDisMiles] = charName;
