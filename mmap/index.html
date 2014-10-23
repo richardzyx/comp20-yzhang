@@ -76,13 +76,17 @@
 				});
 				
 				// Calling Google Places API
-				var request = {
+				/*var request = {
 					location: me,
 					radius: '500',
 					types: ['food']
 				};
 				service = new google.maps.places.PlacesService(map);
 				service.search(request, callback);
+				*/
+
+				map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(
+				document.getElementById('legend'));
 			}
 
 			function putMarkers(){
@@ -150,7 +154,7 @@
 			}
 			
 			// Taken from http://code.google.com/apis/maps/documentation/javascript/places.html
-			function callback(results, status)
+			/*function callback(results, status)
 			{
 				if (status == google.maps.places.PlacesServiceStatus.OK) {
 					alert("Got places back!");
@@ -160,7 +164,8 @@
 					}
 				}
 			}
-			
+			*/
+
 			function createMarker(place)
 			{
 				var placeLoc = place.geometry.location;
@@ -174,14 +179,12 @@
 					infowindow.setContent(place.name);
 					infowindow.open(map, this);
 				});
-      }
+      		}
 		</script>
 	</head>
 	
 	<body onload="init()">
 		<div id="map_canvas"></div>
-		<div id="legend">My first legend!</div>
-		map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(
-				document.getElementById('legend'));
+		<div id="legend"><h3>Distance</h3></div>
 	</body>
 </html>
