@@ -8,7 +8,7 @@
 	<script>
 	  // Most of your work will be done here...
 			function store(){
-				var text = $("#msg").html();
+				var text = $("#msg").val();
 				console.log("here111" + text);
 				localStorage[new Date().getTime()] = text;
 				reload();
