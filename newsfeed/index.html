@@ -7,6 +7,19 @@
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 	<script>
 	  // Most of your work will be done here...
+		$(document).ready(function(){
+			var text = $("#msg").html();
+			localStorage[new Date().getTim()] = txt;
+			reload();
+
+			function reload(){
+				output = "";
+				for (key in localStorage){
+					output = "<p>" + localStorage[key] + "</p>\n" + output;
+				}
+				$("#news").html() = output; 
+			}
+ 		});
 	</script>
 </head>
 
