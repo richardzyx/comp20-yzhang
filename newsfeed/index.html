@@ -9,13 +9,16 @@
 	  // Most of your work will be done here...
 			function store(){
 				var text = $("#msg").html();
+				console.log("here111");
 				localStorage[new Date().getTime()] = text;
 				reload();
 			}
 
 			function reload(){
+				console.log("here222");
 				output = "";
 				for (key in localStorage){
+					console.log(localStorage[key]);
 					output = "<p>" + localStorage[key] + "</p>\n" + output;
 				}
 				$("#news").html(output); 
