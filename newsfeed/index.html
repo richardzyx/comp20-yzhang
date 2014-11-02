@@ -9,7 +9,7 @@
 	  // Most of your work will be done here...
 		$(document).ready(function(){
 			var text = $("#msg").html();
-			localStorage[new Date.getTime()] = txt;
+			localStorage[new Date().getTime()] = txt;
 			reload();
 
 			function reload(){
