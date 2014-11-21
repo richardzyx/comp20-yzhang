@@ -51,7 +51,7 @@
 				me = new google.maps.LatLng(myLat, myLng);
 				// Update map and go there...
 				map.panTo(me);
-				xhr.open("POST","http://chickenofthesea.herokuapp.com/sendLocation", true);
+				xhr.open("POST","https://damp-citadel-9726.herokuapp.com/sendLocation", true);
 				xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 				xhr.send("login=CruellaDeVil&lat="+myLat+"&lng="+myLng);	
 				xhr.onreadystatechange=function(){
