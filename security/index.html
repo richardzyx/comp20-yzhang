@@ -8,7 +8,7 @@
 	<meta charset = "utf-8" />
 </head>
 <body>
-<h1>Security Assessment Assignment 4 for Comp20</h1>
+<h1>Security Assessment Assignment 4 for COMP20</h1>
 
 <p>Prepared by <a href="http://richardzyx.github.io/">Richard Yuxuan Zhang</a> &bull; 12/4/2014</p>
 
@@ -16,13 +16,13 @@
 
 <p>This assessment tests the security of the <a href="https://shielded-temple-1577.herokuapp.com/">Checkins Server</a> web application developed by <a href="http://ybenhayun.github.io/">@Yuval</a>. This web application is a server for accepting client's geo-locations as check-in information, providing past one hundred history check-in records, and also connecting to the MBTA's redline API. My responsibility is to find vulnerability and exploitable loopholes in this server, and give credible assessment for each finding.</p>
 
-<h2>Methdology</h2>
+<h2>Methodology</h2>
 
-<p>Testing was first carried out in "black-box" setting, with common vulnerability checks and attacks. And then I looked at Yuval's source code and made further suggestions on the possible security loopholes. The code and server was run on heroku and not run on my local computer.</p>
+<p>Testing was first carried out in "black-box" setting, with common vulnerability checks and attacks. And then I looked at Yuval's source code and made further suggestions on the possible security loopholes. The code and server was run on Heroku and not run on my local computer.</p>
 
 <h2>Abstract of Finding</h2>
 
-<p>I will come back to this point later</p>
+<p>Overall, the server is easily exposed to basic attacks including scripted, meaningless user input, leak of the entire database, redirection, and faked geo-location. The first problem can cause the leak of the entire server's database with a simple request to the server. The lack of user input caused the second and third problem, which can either overwhelm the server or redirect the server to any web page. The final problem is a potential threat if one wants to expand the server's function to geo-location based social networking, since it is very hard to fix this vulnerability.</p>
 
 <h2>Issues Found</h2>
 
@@ -36,7 +36,7 @@
 		Location: /locations.json?
 	</li>
 	<li>
-		Severity of issue: High, considering the fact that the attacker can now access to all records that is not encypted at the first place.
+		Severity of issue: High, considering the fact that the attacker can now access to all records that is not encrypted at the first place.
 	</li>
 	<li>
 		Method of Finding: Through in class discussion on MongoDB vulnerability, and this is a rather common one for all server using MongoDB.
@@ -47,7 +47,7 @@
 		</p>
 	</li>
 	<li>
-		Resolution: Gabe Joseph's solution is perfect: the mongo query should be build explicitly, not taken entirely from user input!
+		Resolution: Gabe Joseph's solution is perfect: the Mongo query should be build explicitly, not taken entirely from user input!
 		<pre><code>if (request.query.username) {
 collection.find( { 'username' : sanitize(request.query.username) });
 //Use data...
@@ -70,10 +70,10 @@ collection.find( { 'username' : sanitize(request.query.username) });
 		Severity of issue: High, since this vulnerability has the ability to make the disable normal visiting to the website.
 	</li>
 	<li>
-		Method of Finding: Through in class iscussion on user input, and this is a typical result if you don't check for user input. A simple curl could do the trick: <code>"curl --data "login=<$script$ type="text/javascript">window.location.href='http://www.google.com'</$script$>" https://shielded-temple-1577.herokuapp.com/sendLocationclear"</code>. I put extra $ sign in case of redirection on this page.
+		Method of Finding: Through in class discussion on user input, and this is a typical result if you don't check for user input. A simple curl could do the trick: <code>"curl --data "login=<$script$ type="text/javascript">window.location.href='http://www.google.com'</$script$>" https://shielded-temple-1577.herokuapp.com/sendLocationclear"</code>. I put extra $ sign in case of redirection on this page.
 	</li>
 	<li>
-		Proof of Vulnerability:Since the index page is now being redirected to Google, I will post a screenshot on the success injection of the script:
+		Proof of Vulnerability:Since the index page is now being redirected to Google, I will post a screen shot on the success injection of the script:
 		<P>
 			<img src="XSS.png" alt="XSS Proof">
 		</P>
@@ -99,7 +99,7 @@ collection.find( { 'username' : sanitize(request.query.username) });
 		Location: sendLocation
 	</li>
 	<li>
-		Severity of issue: Medium, while the attack could use minumum data to create overwhelming data to shut down the server.
+		Severity of issue: Medium, while the attack could use minimum data to create overwhelming data to shut down the server.
 	</li>
 	<li>
 		Method of Finding: While tackling XSS vulnerability, see Problem 2's picture.
@@ -129,25 +129,28 @@ else {
 </ul>
 </li>
 
-<li><p><strong>Problem 4</strong></p>
+<li><p><strong>Accepted Fake Geo-location</strong></p>
 <ul>
 	<li>
-		Issue:
+		Issue: The server cannot tell if the geo-location is faked.
 	</li>
 	<li>
-		Location:
+		Location: Through assignment two accessible <a href="http://ybenhayun.github.io/geoIndex.html">Here</a>.
 	</li>
 	<li>
-		Severity of issue:
+		Severity of issue: High, considering the app as a geo-location based interaction social network tool, the faking of geo-location could be devastating.
 	</li>
 	<li>
-		Method of Finding:
+		Method of Finding: When I was using Chrome Development Tool, I found this possibility to fake geo-location with chrome's built-in function. See the picture attached as proof of vulnerability.
 	</li>
 	<li>
-		Proof of Vulnerability:
+		Proof of Vulnerability: Using the Chrome Development Tool, one can fake geo-location very easily.
+		<p>
+			<img src="geo.png" alt="Proof of fake geo-location">
+		</p>
 	</li>
 	<li>
-		Resolution:
+		Resolution: Protecting the server from fake geo-location can be a difficult task as being discussed <a href="http://stackoverflow.com/questions/3319414/any-way-to-verify-users-geolocation">here</a>. In short there is no perfect solution, and the most possible solution is to verify client's IP address, which can then also be tempered.
 	</li>
 </ul>
 </li>
@@ -156,6 +159,6 @@ else {
 
 <h2>Conclusion</h2>
 
-<p></p>
+<p>To conclude, the first step towards a safer server is to correctly add user input check. Further validation should be considered for queries and POST API as recommended. Meanwhile, the problem of fake geo-location is nearly impossible to be fixed, so one should not focus on finding the cure for this loophole.</p>
 </body>
 </html>
