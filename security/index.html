@@ -27,71 +27,104 @@
 <h2>Issues Found</h2>
 
 <ol>
+<li><p><strong>MongoDB Find Search</strong></p>
+<ul>
+	<li>
+		Issue: Through MongoDB's find function's vulnerability to include <code>[$ne]</code> for search inquiry, one can easily access to the records of all login users.
+	</li>
+	<li>
+		Location: /locations.json?
+	</li>
+	<li>
+		Severity of issue: High, considering the fact that the attacker can now access to all records that is not encypted at the first place.
+	</li>
+	<li>
+		Method of Finding: Through in class discussion on MongoDB vulnerability, and this is a rather common one for all server using MongoDB.
+	</li>
+	<li>
+		Proof of Vulnerability:<p>
+			<img src="MongoDB.png" alt="MongoDB loophole proof" />
+		</p>
+	</li>
+	<li>
+		Resolution: Gabe Joseph's solution is perfect: the mongo query should be build explicitly, not taken entirely from user input!
+		<pre><code>if (request.query.username) {
+collection.find( { 'username' : sanitize(request.query.username) });
+//Use data...
+}
+</code></pre>
+	</li>
+
+</ul>
+</li>
+
 <li><p><strong>Cross-Site Scripting</strong></p>
 <ul>
 	<li>
-		Issue:
+		Issue: POST API of the server allows for Javascript insertion, which can be manipulated to a direction to third party websites.
 	</li>
 	<li>
-		Location:
+		Location: /sendLocation
 	</li>
 	<li>
-		Severity of issue:
+		Severity of issue: High, since this vulnerability has the ability to make the disable normal visiting to the website.
 	</li>
 	<li>
-		Method of Finding:
+		Method of Finding: Through in class iscussion on user input, and this is a typical result if you don't check for user input. A simple curl could do the trick: <code>"curl --data "login=<$script$ type="text/javascript">window.location.href='http://www.google.com'</$script$>" https://shielded-temple-1577.herokuapp.com/sendLocationclear"</code>. I put extra $ sign in case of redirection on this page.
 	</li>
 	<li>
-		Proof of Vulnerability:
+		Proof of Vulnerability:Since the index page is now being redirected to Google, I will post a screenshot on the success injection of the script:
+		<P>
+			<img src="XSS.png" alt="XSS Proof">
+		</P>
 	</li>
 	<li>
-		Resolution:
-	</li>
-</ul>
-</li>
-
-<li><p><strong>Problem 2</strong></p>
-<ul>
-	<li>
-		Issue:
+		Resolution: A check for user input is highly recommended with a minimal cost in fixing the code. One can also introduce JQuery validator like <a href="http://jqueryvalidation.org/documentation">this</a> one.
 	</li>
 	<li>
-		Location:
-	</li>
-	<li>
-		Severity of issue:
-	</li>
-	<li>
-		Method of Finding:
-	</li>
-	<li>
-		Proof of Vulnerability:
-	</li>
-	<li>
-		Resolution:
+		Extra notice: While injecting the code, I also found that for the "href" part of the code, if one leave out "http://" the website will be directed to a branch page such as 
+		<p>
+			<code>https://shielded-temple-1577.herokuapp.com/www.google.com</code>. This could be a serious problem is the attack aims to a news/shopping site.
+		</p>
 	</li>
 </ul>
 </li>
 
-<li><p><strong>Problem 3</strong></p>
+<li><p><strong>Validation on Input</strong></p>
 <ul>
 	<li>
-		Issue:
+		Issue: The server did not check if login, lat, and lng are all defined. It is also a really bad practice.
 	</li>
 	<li>
-		Location:
+		Location: sendLocation
 	</li>
 	<li>
-		Severity of issue:
+		Severity of issue: Medium, while the attack could use minumum data to create overwhelming data to shut down the server.
 	</li>
 	<li>
-		Method of Finding:
+		Method of Finding: While tackling XSS vulnerability, see Problem 2's picture.
 	</li>
 	<li>
-		Proof of Vulnerability:
+		Proof of Vulnerability: The photo in Problem 2 can be seen as a proof.
 	</li>
 	<li>
-		Resolution:
+		Resolution: The code for validation should be like this:
+		<p>
+			<pre><code>
+if (login == undefined || lat == undefined || lng == undefined) {
+	response.send(500);
+}
+else {
+	lat=parseFloat(lat);
+	lng=parseFloat(lng);
+	var toInsert = {
+		"login": login,
+		"lat": lat,
+		"lng": lng,
+		"created_at": (new Date()).toJSON(),
+};
+			</code></pre>
+		</p>
 	</li>
 </ul>
 </li>
